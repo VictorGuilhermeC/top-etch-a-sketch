@@ -7,5 +7,8 @@ for (let i = 0; i < n * n; i++) {
   square.className = "square";
   square.style.height = `${ratio}%`;
   square.style.width = `${ratio}%`;
+  square.addEventListener("mouseover", () => {
+    return (square.style.backgroundColor = "red");
+  });
   container.appendChild(square);
 }
