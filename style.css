@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+#container {
+  height: 500px;
+  width: 500px;
+  margin: auto;
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.square {
+  display: flex;
+  flex: 1 1 auto;
+  border: 2px solid black;
+}
