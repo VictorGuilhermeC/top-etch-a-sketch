@@ -1,7 +1,8 @@
 const container = document.querySelector("#container");
+const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 container.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("square"))
-    event.target.style.backgroundColor = "red";
+    event.target.style.backgroundColor = `#${randomColor()}`;
 });
 
 function setSquares(n = 16) {
