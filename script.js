@@ -4,6 +4,13 @@ container.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("square"))
     event.target.style.backgroundColor = `#${randomColor()}`;
 });
+container.addEventListener("mouseover", (event) => {
+  let opacityValue = event.target.style.opacity;
+  if (opacityValue && Number(opacityValue) < 1) {
+    opacityValue = `${Number(opacityValue) + 0.1}`;
+  }
+  event.target.style.opacity = opacityValue;
+});
 
 function setSquares(n = 16) {
   while (container.firstChild) {
@@ -15,6 +22,7 @@ function setSquares(n = 16) {
     square.className = "square";
     square.style.height = `${squareSide}%`;
     square.style.width = `${squareSide}%`;
+    square.style.opacity = "0";
     container.appendChild(square);
   }
 }
