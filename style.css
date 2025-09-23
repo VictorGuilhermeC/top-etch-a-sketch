@@ -1,19 +1,39 @@
-* {
+.etch-a-sketch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  border: 2px;
+}
+
+button {
   box-sizing: border-box;
+  text-align: center;
+  width: 140px;
+  height: 80px;
+  margin: 20px 40px;
+  border-radius: 14px;
+  padding: 10px 8px;
 }
 
 #container {
   height: 500px;
   width: 500px;
   margin: auto;
-  border: 2px solid blue;
+  background-color: #d6d6d6;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 0;
 }
 
 .square {
   display: flex;
   flex: 1 1 auto;
-  border: 2px solid black;
 }
