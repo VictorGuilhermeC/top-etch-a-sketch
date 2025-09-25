@@ -1,16 +1,9 @@
+const squaresNum = document.querySelector("#squaresNumber");
+const normalModeBtn = document.querySelector("#normalModeBtn");
+const rainbowModeBtn = document.querySelector("#rainbowModeBtn");
+const clean = document.querySelector("#clean");
 const container = document.querySelector("#container");
-const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
-container.addEventListener("mouseover", (event) => {
-  if (event.target.classList.contains("square"))
-    event.target.style.backgroundColor = `#${randomColor()}`;
-});
-container.addEventListener("mouseover", (event) => {
-  let opacityValue = event.target.style.opacity;
-  if (opacityValue && Number(opacityValue) < 1) {
-    opacityValue = `${Number(opacityValue) + 0.1}`;
-  }
-  event.target.style.opacity = opacityValue;
-});
+let drawingMode = "normal";
 
 function setSquares(n = 16) {
   while (container.firstChild) {
@@ -29,8 +22,15 @@ function setSquares(n = 16) {
 
 setSquares();
 
-const button = document.querySelector("button");
-button.addEventListener("click", () => {
+container.addEventListener("mouseover", (event) => {
+  let opacityValue = event.target.style.opacity;
+  if (opacityValue && Number(opacityValue) < 1) {
+    opacityValue = `${Number(opacityValue) + 0.1}`;
+  }
+  event.target.style.opacity = opacityValue;
+});
+
+squaresNum.addEventListener("click", () => {
   let value;
   while (!(value >= 1 && value <= 100)) {
     value = window.prompt(
@@ -43,4 +43,31 @@ button.addEventListener("click", () => {
   }
 
   setSquares(value);
+});
+
+normalModeBtn.addEventListener("click", () => {
+  drawingMode = "normal";
+});
+
+rainbowModeBtn.addEventListener("click", () => {
+  drawingMode = "rainbow";
+});
+
+container.addEventListener("mouseover", (event) => {
+  if (!event.target.classList.contains("square")) {
+    return;
+  } else if (drawingMode === "rainbow") {
+    const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
+    event.target.style.backgroundColor = `#${randomColor()}`;
+  } else if (drawingMode === "normal") {
+    event.target.style.backgroundColor = `#1B1B1B`;
+  }
+});
+
+clean.addEventListener("click", () => {
+  const allSquares = document.querySelectorAll(".square");
+  allSquares.forEach((s) => {
+    s.style.backgroundColor = "#d6d6d6";
+    s.style.opacity = "0";
+  });
 });
