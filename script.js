@@ -2,12 +2,12 @@ const squaresNum = document.querySelector("#squaresNumber");
 const normalModeBtn = document.querySelector("#normalModeBtn");
 const rainbowModeBtn = document.querySelector("#rainbowModeBtn");
 const clean = document.querySelector("#clean");
-const container = document.querySelector("#container");
+const screen = document.querySelector("#screen");
 let drawingMode = "normal";
 
 function setSquares(n = 16) {
-  while (container.firstChild) {
-    container.firstChild.remove();
+  while (screen.firstChild) {
+    screen.firstChild.remove();
   }
   const squareSide = 100 / n;
   for (let i = 0; i < n * n; i++) {
@@ -16,13 +16,13 @@ function setSquares(n = 16) {
     square.style.height = `${squareSide}%`;
     square.style.width = `${squareSide}%`;
     square.style.opacity = "0";
-    container.appendChild(square);
+    screen.appendChild(square);
   }
 }
 
 setSquares();
 
-container.addEventListener("mouseover", (event) => {
+screen.addEventListener("mouseover", (event) => {
   let opacityValue = event.target.style.opacity;
   if (opacityValue && Number(opacityValue) < 1) {
     opacityValue = `${Number(opacityValue) + 0.1}`;
@@ -53,7 +53,7 @@ rainbowModeBtn.addEventListener("click", () => {
   drawingMode = "rainbow";
 });
 
-container.addEventListener("mouseover", (event) => {
+screen.addEventListener("mouseover", (event) => {
   if (!event.target.classList.contains("square")) {
     return;
   } else if (drawingMode === "rainbow") {
