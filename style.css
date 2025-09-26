@@ -1,5 +1,16 @@
+html,
 body {
   background-color: #87ceeb;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
 
 .etch-a-sketch {
@@ -11,7 +22,9 @@ body {
   margin: 100px auto;
   background-color: #cf1212;
   border: solid 3px #4b4b4b;
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
   border-radius: 20px;
+  flex-shrink: 0;
 }
 
 h1 {
@@ -76,4 +89,22 @@ button {
 .square {
   display: flex;
   flex: 1 1 auto;
+}
+
+div p,
+ol {
+  font-family: "Bangers";
+  font-weight: 300;
+  font-size: x-large;
+}
+
+li {
+  margin: 5px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Share Tech Mono";
 }
