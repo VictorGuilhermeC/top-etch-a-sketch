@@ -1,14 +1,75 @@
+//Variables
 const squaresNum = document.querySelector("#squaresNumber");
 const normalModeBtn = document.querySelector("#normalModeBtn");
 const rainbowModeBtn = document.querySelector("#rainbowModeBtn");
-const clean = document.querySelector("#clean");
+const reset = document.querySelector("#reset");
 const screen = document.querySelector("#screen");
-let drawingMode = "normal";
+let rainbowModeOn = false;
+
+//Events
+window.addEventListener("load", () => setSquares());
+
+screen.addEventListener("mouseover", (event) => {
+  if (!event.target.classList.contains("square")) {
+    return;
+  }
+
+  event.target.style.backgroundColor = rainbowModeOn
+    ? `#${getRandomColor()}`
+    : "#1B1B1B";
+
+  raiseOpacity(event.target);
+});
+
+squaresNum.addEventListener("click", () => {
+  let numberOfSquares;
+
+  while (!(numberOfSquares >= 1 && numberOfSquares <= 100)) {
+    numberOfSquares = window.prompt(
+      "Choose how many squares per size (min: 1, max: 100)",
+      "16"
+    );
+
+    if (numberOfSquares === null) return;
+
+    numberOfSquares = Number(numberOfSquares);
+  }
+
+  setSquares(numberOfSquares);
+});
+
+normalModeBtn.addEventListener("click", () => {
+  rainbowModeOn = false;
+});
+
+rainbowModeBtn.addEventListener("click", () => {
+  rainbowModeOn = true;
+});
+
+reset.addEventListener("click", () => {
+  const allSquares = document.querySelectorAll(".square");
+  allSquares.forEach((s) => {
+    s.style.backgroundColor = "#d6d6d6";
+    s.style.opacity = "0";
+  });
+});
+
+//Auxiliary functions
+
+function raiseOpacity(target) {
+  let opacityValue = target.style.opacity;
+  if (Number(opacityValue) < 1) {
+    opacityValue = `${Number(opacityValue) + 0.1}`;
+  }
+  target.style.opacity = opacityValue;
+}
+
+function getRandomColor() {
+  return Math.floor(Math.random() * 16777215).toString(16);
+}
 
 function setSquares(n = 16) {
-  while (screen.firstChild) {
-    screen.firstChild.remove();
-  }
+  screen.innerHTML = "";
   const squareSide = 100 / n;
   for (let i = 0; i < n * n; i++) {
     const square = document.createElement("div");
@@ -19,55 +80,3 @@ function setSquares(n = 16) {
     screen.appendChild(square);
   }
 }
-
-setSquares();
-
-screen.addEventListener("mouseover", (event) => {
-  let opacityValue = event.target.style.opacity;
-  if (opacityValue && Number(opacityValue) < 1) {
-    opacityValue = `${Number(opacityValue) + 0.1}`;
-  }
-  event.target.style.opacity = opacityValue;
-});
-
-squaresNum.addEventListener("click", () => {
-  let value;
-  while (!(value >= 1 && value <= 100)) {
-    value = window.prompt(
-      "Choose how many squares per size (min: 1, max:100)",
-      "16"
-    );
-    if (value === null) {
-      return;
-    }
-  }
-
-  setSquares(value);
-});
-
-normalModeBtn.addEventListener("click", () => {
-  drawingMode = "normal";
-});
-
-rainbowModeBtn.addEventListener("click", () => {
-  drawingMode = "rainbow";
-});
-
-screen.addEventListener("mouseover", (event) => {
-  if (!event.target.classList.contains("square")) {
-    return;
-  } else if (drawingMode === "rainbow") {
-    const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
-    event.target.style.backgroundColor = `#${randomColor()}`;
-  } else if (drawingMode === "normal") {
-    event.target.style.backgroundColor = `#1B1B1B`;
-  }
-});
-
-clean.addEventListener("click", () => {
-  const allSquares = document.querySelectorAll(".square");
-  allSquares.forEach((s) => {
-    s.style.backgroundColor = "#d6d6d6";
-    s.style.opacity = "0";
-  });
-});
