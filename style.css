@@ -19,7 +19,7 @@ main {
   align-items: center;
   height: 700px;
   width: 820px;
-  margin: 100px auto;
+  margin: auto;
   background-color: #cf1212;
   border: solid 3px #4b4b4b;
   box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
@@ -91,15 +91,26 @@ button {
   flex: 1 1 auto;
 }
 
-div p,
-ol {
+.rules {
+  display: flex;
+  flex-direction: column;
   font-family: "Bangers";
   font-weight: 300;
+  margin: auto 30px;
+  align-items: flex-start;
+}
+
+ol {
   font-size: x-large;
+  padding-left: 12px;
 }
 
 li {
-  margin: 5px;
+  margin-bottom: 8px;
+}
+
+.rules p {
+  font-size: xx-large;
 }
 
 footer {
@@ -107,4 +118,12 @@ footer {
   flex-direction: column;
   align-items: center;
   font-family: "Share Tech Mono";
+}
+
+footer > p {
+  margin: 8px;
+}
+
+footer a {
+  text-decoration: none;
 }
